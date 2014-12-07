@@ -5,5 +5,7 @@ go:
 
 notifications:
     email:
+        recipients:
+            - tyrell.wkeene@gmail.com
         on_success: change
-        on_failure: change
+        on_failure: always
