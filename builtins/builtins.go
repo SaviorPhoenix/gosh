@@ -44,6 +44,17 @@ var builtins = map[string]builtinFunc{
 			}
 			return 1
 		}),
+	"set-var": builtinFunc(
+		func(c cmd.GoshCmd) int {
+			if c.GetElements() != 3 {
+				fmt.Println("Usage: set-var <variable name> <new variable value>")
+			} else {
+				env := shell.Sh.GetEnv()
+				tokens := c.GetTokens()
+				env.SetEnvVar(tokens[1], tokens[2])
+			}
+			return 1
+		}),
 
 	"print-var": builtinFunc(
 		func(c cmd.GoshCmd) int {
