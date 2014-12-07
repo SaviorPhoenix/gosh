@@ -6,10 +6,10 @@ import (
 	"testing"
 )
 
+//Ensure that when we try to add a variable that already exists
+//we set it instead of adding another variable of the same name
 func Test_AddEnvVar(t *testing.T) {
 	env := InitEnv()
-	//Ensure that when we try to add a variable that already exists
-	//we set it instead of adding another variable of the same name
 	env.AddEnvVar("home", "two")
 	testVartwo := env.GetEnvVar("home")
 	if testVartwo != "two" {
@@ -17,15 +17,16 @@ func Test_AddEnvVar(t *testing.T) {
 	}
 }
 
+//Ensure that if we try to set a non-existant variable, we add it instead
 func Test_SetEnvVar(t *testing.T) {
 	env := InitEnv()
-	//Ensure that if we try to set a non-existant variable, we add it instead
 	env.SetEnvVar("asdf", "asdf")
 	if env.CheckExists("asdf") != true {
 		t.Error("Failed to add new variable when trying to set non-existing variable")
 	}
 }
 
+//Ensure that we get "" if we try to env.GetEnvVar a variable that doesn't exist
 func Test_GetEnvVar(t *testing.T) {
 	env := InitEnv()
 	nilVar := env.GetEnvVar("fdsa")
@@ -34,23 +35,25 @@ func Test_GetEnvVar(t *testing.T) {
 	}
 }
 
+//Ensure that we can delete existing variables and get false when we try to delete non
+//existant variables
 func Test_DeleteEnvVar(t *testing.T) {
 	env := InitEnv()
-
-	//Ensure that we can delete existing environment variables
 	env.AddEnvVar("test", "test")
 	env.DeleteEnvVar("test")
+
+	//Ensure that we can delete existing environment variables
 	if env.CheckExists("test") == true {
 		t.Error("Failed to delete environment variable")
 	}
 
 	//Ensure that we get false when trying to delete non-existant environment variables
-	ret := env.DeleteEnvVar("test")
-	if ret != false {
+	if env.DeleteEnvVar("test") != false {
 		t.Error("Expecte false when trying to delete non-existant variable")
 	}
 }
 
+//Ensure that we get a correct default variable when calling InitEnv()
 func Test_InitEnv(t *testing.T) {
 	env := InitEnv()
 
