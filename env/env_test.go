@@ -1,6 +1,7 @@
 package env
 
 import (
+	"os"
 	"os/user"
 	"testing"
 )
@@ -57,9 +58,9 @@ func Test_InitEnv(t *testing.T) {
 	var strTests = map[string]string{
 		"prompt": "$ ",
 		"home":   usr.HomeDir,
-		"editor": "mvim",
-		"term":   "rxvt-unicode-256color",
-		"pager":  "less",
+		"editor": os.Getenv("EDITOR"),
+		"term":   os.Getenv("TERM"),
+		"pager":  os.Getenv("PAGER"),
 		"user":   usr.Username,
 	}
 
