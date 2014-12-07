@@ -21,8 +21,7 @@ var builtins = map[string]builtinFunc{
 
 	"cd": builtinFunc(
 		func(c cmd.GoshCmd) int {
-			name := c.GetNameStr()
-			if c.GetElements() == 1 && *name == "cd" {
+			if c.GetElements() == 1 {
 				env := shell.Sh.GetEnv()
 				os.Chdir(env.GetEnvVar("home"))
 				return 1
@@ -44,6 +43,7 @@ var builtins = map[string]builtinFunc{
 			}
 			return 1
 		}),
+
 	"set-var": builtinFunc(
 		func(c cmd.GoshCmd) int {
 			if c.GetElements() != 3 {
@@ -63,7 +63,13 @@ var builtins = map[string]builtinFunc{
 			} else {
 				env := shell.Sh.GetEnv()
 				tokens := c.GetTokens()
+
 				printVar := env.GetEnvVar(tokens[1])
+				if printVar == "" {
+					fmt.Println("No such variable:", tokens[1])
+					return 1
+				}
+
 				fmt.Println(printVar)
 			}
 			return 1
@@ -77,7 +83,10 @@ var builtins = map[string]builtinFunc{
 				env := shell.Sh.GetEnv()
 				tokens := c.GetTokens()
 				delVar := env.GetEnvVar(tokens[1])
-				env.DeleteEnvVar(delVar)
+
+				if env.DeleteEnvVar(delVar) == false {
+					fmt.Println("No such variable:", tokens[1])
+				}
 			}
 			return 1
 		}),
