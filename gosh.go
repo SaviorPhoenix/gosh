@@ -49,12 +49,15 @@ func main() {
 		}
 
 		c := cmd.ParseInput(input)
+
 		//CheckBuiltin will return 1 if the command was a builtin,
-		//So of course we want to skip executeCommand if it does
-		if builtins.CheckBuiltin(c) == 1 {
+		//and -1 if we're exiting the shell.
+		isBuiltin := builtins.CheckBuiltin(c)
+		if isBuiltin == -1 {
+			break
+		} else if isBuiltin == 1 {
 			continue
 		}
-
 		executeCommand(c)
 	}
 }

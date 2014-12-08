@@ -13,10 +13,7 @@ var builtins = map[string]builtinFunc{
 	"exit": builtinFunc(
 		func(c cmd.GoshCmd) int {
 			fmt.Println("exit")
-			os.Exit(0)
-
-			//Not reached, obviously
-			return 1
+			return -1
 		}),
 
 	"cd": builtinFunc(
