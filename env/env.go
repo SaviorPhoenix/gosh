@@ -19,8 +19,13 @@ func InitEnv() Vars {
 	usr, _ := user.Current()
 	pwd, _ := os.Getwd()
 
+	//Variables that control the behavior of the shell
 	v.AddEnvVar("prompt", "$ ")
 	v.AddEnvVar("pwd", pwd)
+	v.AddEnvVar("history", "on")
+	v.AddEnvVar("history_file", usr.HomeDir+"/.gosh_history")
+
+	//General purpose environment variables
 	v.AddEnvVar("home", usr.HomeDir)
 	v.AddEnvVar("editor", os.Getenv("EDITOR"))
 	v.AddEnvVar("term", os.Getenv("TERM"))
@@ -29,6 +34,14 @@ func InitEnv() Vars {
 
 	v.UpdateCount()
 	return v
+}
+
+func (v *Vars) VarCmp(name string, cmp string) bool {
+	if v.GetEnvVar(name) == cmp {
+		return true
+	} else {
+		return false
+	}
 }
 
 func (v *Vars) SetDirty(val bool) {

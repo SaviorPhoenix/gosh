@@ -44,6 +44,10 @@ func main() {
 			continue
 		}
 
+		if env.VarCmp("history", "on") == true {
+			readline.AddHistory(*input)
+		}
+
 		c := cmd.ParseInput(input)
 		//CheckBuiltin will return 1 if the command was a builtin,
 		//So of course we want to skip executeCommand if it does
