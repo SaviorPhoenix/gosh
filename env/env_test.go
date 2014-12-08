@@ -58,8 +58,10 @@ func Test_InitEnv(t *testing.T) {
 	env := InitEnv()
 
 	usr, _ := user.Current()
+	pwd, _ := os.Getwd()
 	var strTests = map[string]string{
 		"prompt": "$ ",
+		"pwd":    pwd,
 		"home":   usr.HomeDir,
 		"editor": os.Getenv("EDITOR"),
 		"term":   os.Getenv("TERM"),

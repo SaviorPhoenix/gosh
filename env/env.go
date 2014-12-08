@@ -17,13 +17,16 @@ func InitEnv() Vars {
 	v.env = make(map[string]string)
 
 	usr, _ := user.Current()
+	pwd, _ := os.Getwd()
 
 	v.AddEnvVar("prompt", "$ ")
+	v.AddEnvVar("pwd", pwd)
 	v.AddEnvVar("home", usr.HomeDir)
 	v.AddEnvVar("editor", os.Getenv("EDITOR"))
 	v.AddEnvVar("term", os.Getenv("TERM"))
 	v.AddEnvVar("pager", os.Getenv("PAGER"))
 	v.AddEnvVar("user", os.Getenv("USER"))
+
 	v.UpdateCount()
 	return v
 }
