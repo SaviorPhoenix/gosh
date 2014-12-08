@@ -59,6 +59,10 @@ func Test_InitEnv(t *testing.T) {
 
 	usr, _ := user.Current()
 	pwd, _ := os.Getwd()
+
+	//These are the default environment variables that come
+	//pre loaded and hardcoded. The user can still set them
+	//with the 'set-var' builtin command.
 	var strTests = map[string]string{
 		"prompt": "$ ",
 		"pwd":    pwd,
