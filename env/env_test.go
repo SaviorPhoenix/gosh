@@ -64,13 +64,15 @@ func Test_InitEnv(t *testing.T) {
 	//pre loaded and hardcoded. The user can still set them
 	//with the 'set-var' builtin command.
 	var strTests = map[string]string{
-		"prompt": "$ ",
-		"pwd":    pwd,
-		"home":   usr.HomeDir,
-		"editor": os.Getenv("EDITOR"),
-		"term":   os.Getenv("TERM"),
-		"pager":  os.Getenv("PAGER"),
-		"user":   usr.Username,
+		"prompt":       "$ ",
+		"pwd":          pwd,
+		"history":      "on",
+		"history_file": usr.HomeDir + "/.gosh_history",
+		"home":         usr.HomeDir,
+		"editor":       os.Getenv("EDITOR"),
+		"term":         os.Getenv("TERM"),
+		"pager":        os.Getenv("PAGER"),
+		"user":         usr.Username,
 	}
 
 	//Check that our default environment variables exist
