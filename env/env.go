@@ -7,14 +7,14 @@ import (
 )
 
 type Vars struct {
-	Dirty bool
-	Count int
-	Env   map[string]string
+	dirty bool
+	count int
+	env   map[string]string
 }
 
 func InitEnv() Vars {
-	v := Vars{Dirty: false, Count: 0, Env: nil}
-	v.Env = make(map[string]string)
+	v := Vars{dirty: false, count: 0, env: nil}
+	v.env = make(map[string]string)
 
 	usr, _ := user.Current()
 
@@ -29,15 +29,23 @@ func InitEnv() Vars {
 }
 
 func (v *Vars) SetDirty(val bool) {
-	v.Dirty = val
+	v.dirty = val
 }
 
 func (v *Vars) UpdateCount() {
-	v.Count = len(v.Env)
+	v.count = len(v.env)
+}
+
+func (v *Vars) GetCount() int {
+	return v.count
+}
+
+func (v *Vars) CheckDirty() bool {
+	return v.dirty
 }
 
 func (v *Vars) CheckExists(name string) bool {
-	Var := v.Env[name]
+	Var := v.env[name]
 	if Var != "" {
 		return true
 	} else {
@@ -50,7 +58,7 @@ func (v *Vars) AddEnvVar(name string, val string) {
 		v.SetEnvVar(name, val)
 		return
 	}
-	v.Env[name] = val
+	v.env[name] = val
 	v.UpdateCount()
 }
 
@@ -59,14 +67,14 @@ func (v *Vars) SetEnvVar(name string, val string) {
 		v.AddEnvVar(name, val)
 		return
 	} else {
-		v.Env[name] = val
+		v.env[name] = val
 		v.SetDirty(true)
 	}
 }
 
 func (v *Vars) GetEnvVar(name string) string {
 	if v.CheckExists(name) == true {
-		return v.Env[name]
+		return v.env[name]
 	} else {
 		return ""
 	}
@@ -74,7 +82,7 @@ func (v *Vars) GetEnvVar(name string) string {
 
 func (v *Vars) DeleteEnvVar(name string) bool {
 	if v.CheckExists(name) == true {
-		delete(v.Env, name)
+		delete(v.env, name)
 		v.UpdateCount()
 		return true
 	} else {
@@ -83,8 +91,8 @@ func (v *Vars) DeleteEnvVar(name string) bool {
 }
 
 func (v *Vars) Print() {
-	fmt.Println("Total variables:", v.Count, "\nDirty Environment:", v.Dirty)
-	for name, val := range v.Env {
+	fmt.Println("Total variables:", v.count, "\nDirty Environment:", v.dirty)
+	for name, val := range v.env {
 		fmt.Println(name, ":", val)
 	}
 }

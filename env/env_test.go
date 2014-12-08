@@ -76,13 +76,13 @@ func Test_InitEnv(t *testing.T) {
 	}
 
 	//Ensure the environment isn't dirty by default
-	if env.Dirty != false {
-		t.Error("env.Dirty != false")
+	if env.dirty != false {
+		t.Error("env.dirty != false")
 	}
 
 	//Ensure we have the right amount of variables
-	if env.Count != len(strTests) {
-		t.Error("Invalid variable count:", env.Count)
+	if env.count != len(strTests) {
+		t.Error("Invalid variable count:", env.count)
 	}
 
 	env.Print()
