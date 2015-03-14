@@ -45,9 +45,8 @@ func main() {
 		}
 
 		c := cmd.ParseInput(*input)
-
-		builtin, err := builtins.CheckBuiltin(c)
-		if err == nil {
+		builtin := builtins.CheckBuiltin(c)
+		if builtin != nil {
 			if err := builtin(c); err != nil {
 				fmt.Println(err)
 			}

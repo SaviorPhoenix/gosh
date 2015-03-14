@@ -1,7 +1,6 @@
 package builtins
 
 import (
-	"errors"
 	"fmt"
 	"github.com/SaviorPhoenix/gosh/cmd"
 	"github.com/SaviorPhoenix/gosh/sh"
@@ -93,11 +92,6 @@ var builtins = map[string]builtinFunc{
 		}),
 }
 
-func CheckBuiltin(c cmd.GoshCmd) (builtinFunc, error) {
-	do := builtins[c.NameStr]
-	if do != nil {
-		return do, nil
-	} else {
-		return nil, errors.New("No such builtin")
-	}
+func CheckBuiltin(c cmd.GoshCmd) builtinFunc {
+	return builtins[c.NameStr]
 }
