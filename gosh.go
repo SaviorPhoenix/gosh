@@ -18,7 +18,7 @@ func executeCommand(c cmd.GoshCmd) error {
 	file := c.GetNameStr()
 	args := parts[0:len(parts)]
 
-	run := exec.Command(*file, args...)
+	run := exec.Command(file, args...)
 
 	run.Stdout = os.Stdout
 	run.Stdin = os.Stdin
@@ -44,7 +44,7 @@ func main() {
 			readline.AddHistory(*input)
 		}
 
-		c := cmd.ParseInput(input)
+		c := cmd.ParseInput(*input)
 
 		builtin, err := builtins.CheckBuiltin(c)
 		if err == nil {

@@ -9,19 +9,19 @@ var testCmdStr string = "ls -hal"
 //Ensure that the name of the command, in this
 //case 'ls', is correct
 func Test_GetNameStr(t *testing.T) {
-	cmd := ParseInput(&testCmdStr)
+	cmd := ParseInput(testCmdStr)
 
 	got := cmd.GetNameStr()
-	if *got != "ls" {
+	if got != "ls" {
 		t.Error("Invalid name string from cmd.GetNameStr()")
 	}
 }
 
 //Ensure that we get the correct raw string when using GetRawStr()
 func Test_GetRawStr(t *testing.T) {
-	cmd := ParseInput(&testCmdStr)
+	cmd := ParseInput(testCmdStr)
 
-	if cmd.GetRawStr() != &testCmdStr {
+	if cmd.GetRawStr() != testCmdStr {
 		t.Error("Invalid raw string from cmd.GetRawStr()")
 	}
 }
@@ -29,7 +29,7 @@ func Test_GetRawStr(t *testing.T) {
 //Ensure that we get the correct count of tokens in the command using GetElements
 func Test_GetElements(t *testing.T) {
 	var expect int = 2
-	cmd := ParseInput(&testCmdStr)
+	cmd := ParseInput(testCmdStr)
 
 	if cmd.GetElements() != expect {
 		t.Error("Invalid element count from cmd.GetElements()")
@@ -40,7 +40,7 @@ func Test_GetElements(t *testing.T) {
 //the array itself is correct.
 func Test_GetTokens(t *testing.T) {
 	expect := []string{"ls", "-hal"}
-	cmd := ParseInput(&testCmdStr)
+	cmd := ParseInput(testCmdStr)
 
 	arr := cmd.GetTokens()
 

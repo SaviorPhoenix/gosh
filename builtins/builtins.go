@@ -94,7 +94,7 @@ var builtins = map[string]builtinFunc{
 }
 
 func CheckBuiltin(c cmd.GoshCmd) (builtinFunc, error) {
-	do := builtins[*c.NameStr]
+	do := builtins[c.NameStr]
 	if do != nil {
 		return do, nil
 	} else {
