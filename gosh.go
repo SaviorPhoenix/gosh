@@ -12,7 +12,7 @@ import (
 	"github.com/SaviorPhoenix/gosh/sh"
 )
 
-func executeCommand(c cmd.GoshCmd) int {
+func executeCommand(c cmd.GoshCmd) error {
 	str := strings.Join(c.Tokens[1:len(c.Tokens)], " ")
 	parts := strings.Fields(str)
 	file := c.GetNameStr()
@@ -25,10 +25,7 @@ func executeCommand(c cmd.GoshCmd) int {
 	run.Stderr = os.Stderr
 
 	err := run.Run()
-	if err != nil {
-		fmt.Println(err)
-	}
-	return 0
+	return err
 }
 
 func main() {
@@ -58,6 +55,8 @@ func main() {
 		} else if isBuiltin == 1 {
 			continue
 		}
-		executeCommand(c)
+		if err := executeCommand(c); err != nil {
+			fmt.Println(err)
+		}
 	}
 }
