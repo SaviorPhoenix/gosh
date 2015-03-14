@@ -36,7 +36,6 @@ func main() {
 		prompt := env.GetEnvVar("prompt")
 		input := readline.ReadLine(&prompt)
 
-		//Don't bother parsing input if it's empty
 		if *input == "" {
 			continue
 		}
@@ -47,16 +46,16 @@ func main() {
 
 		c := cmd.ParseInput(input)
 
-		//CheckBuiltin will return 1 if the command was a builtin,
-		//and -1 if we're exiting the shell.
-		isBuiltin := builtins.CheckBuiltin(c)
-		if isBuiltin == -1 {
-			break
-		} else if isBuiltin == 1 {
+		builtin, err := builtins.CheckBuiltin(c)
+		if err == nil {
+			if err := builtin(c); err != nil {
+				fmt.Println(err)
+			}
 			continue
-		}
-		if err := executeCommand(c); err != nil {
-			fmt.Println(err)
+		} else {
+			if err := executeCommand(c); err != nil {
+				fmt.Println(err)
+			}
 		}
 	}
 }
