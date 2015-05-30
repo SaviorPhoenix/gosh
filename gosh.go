@@ -7,9 +7,9 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/SaviorPhoenix/gosh/builtins"
-	"github.com/SaviorPhoenix/gosh/cmd"
-	"github.com/SaviorPhoenix/gosh/sh"
+	"github.com/tywkeene/gosh/builtins"
+	"github.com/tywkeene/gosh/cmd"
+	"github.com/tywkeene/gosh/sh"
 )
 
 func executeCommand(c cmd.GoshCmd) error {

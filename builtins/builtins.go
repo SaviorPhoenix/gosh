@@ -2,8 +2,8 @@ package builtins
 
 import (
 	"fmt"
-	"github.com/SaviorPhoenix/gosh/cmd"
-	"github.com/SaviorPhoenix/gosh/sh"
+	"github.com/tywkeene/gosh/cmd"
+	"github.com/tywkeene/gosh/sh"
 	"os"
 )
 

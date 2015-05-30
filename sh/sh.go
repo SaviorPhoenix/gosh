@@ -1,7 +1,7 @@
 package shell
 
 import (
-	"github.com/SaviorPhoenix/gosh/env"
+	"github.com/tywkeene/gosh/env"
 	"os"
 	"os/signal"
 )
