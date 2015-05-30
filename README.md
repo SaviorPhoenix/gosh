@@ -1,7 +1,7 @@
 Gosh
 ===
 
-[![Build Status](https://travis-ci.org/SaviorPhoenix/gosh.svg?branch=master)](https://travis-ci.org/SaviorPhoenix/gosh)
+[![Build Status](https://travis-ci.org/tywkeene/gosh.svg?branch=master)](https://travis-ci.org/tywkeene/gosh)
 
 This is a simple shell I'm writing, much like the old sh to teach myself Go.
 
